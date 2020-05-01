@@ -14,12 +14,12 @@
 <style>
   .title-container {
     position: relative;
-    left: 220px;
+    left: var(--sidebar-width);
     top: 0px;
     display: grid;
-    width: calc(100vw - 220px);
+    width: calc(100vw - var(--sidebar-width));
     grid-template-rows: 60px min-content 30px 1fr 10px;
-    grid-template-columns: 20px 1fr 400px 40px 400px 1fr 20px;
+    grid-template-columns: 20px 1fr 400px 40px minmax(300px, 400px) 1fr 20px;
     text-align: left;
   }
 
@@ -34,6 +34,25 @@
   .heading-container {
     grid-row: 2;
     grid-column: 3/6;
+  }
+  @media (max-width: 780px) {
+    .title-container {
+      grid-template-rows: 30px min-content 30px auto 30px auto 10px;
+      grid-template-columns: 20px auto 1fr auto 20px;
+    }
+    .content-container {
+      grid-column: 3;
+      grid-row: 6;
+    }
+    .image-container {
+      grid-column: 3;
+      grid-row: 4;
+      justify-self: center;
+    }
+    .heading-container {
+      grid-row: 2;
+      grid-column: 3;
+    }
   }
   h2 {
     margin: 0px;
@@ -65,8 +84,8 @@
   </div>
   <div class="content-container">
 
-    <!-- <Social />
-    <h2>mondays at 6pm</h2> -->
+    <Social />
+    <h2>mondays at 6pm</h2>
 
     <Content html={show.html} />
   </div>

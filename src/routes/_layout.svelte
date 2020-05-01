@@ -20,7 +20,7 @@
   }
   import { stores } from "@sapper/app";
   const { preloading, page, session } = stores();
-  onMount(() => {
+  const analyse = () => {
     let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let analyser = audioCtx.createAnalyser();
 
@@ -34,7 +34,9 @@
     let dataArray = new Uint8Array(bufferLength);
     analyser.getByteTimeDomainData(dataArray);
     $audio.analyser = analyser;
-  });
+  };
+  if (typeof document != "undefined")
+    document.addEventListener("click", analyse, { once: true });
 </script>
 
 <style>
@@ -53,7 +55,7 @@
   }
 
   .logomark {
-    width: 220px;
+    width: var(--sidebar-width);
     display: grid;
     grid-template-columns: min-content min-content 1fr;
   }
@@ -109,7 +111,9 @@
   src={$audio.src}
   bind:volume={$audio.volume}
   bind:duration={$audio.duration}
-  on:timeupdate={e => ($audio.currentTime = e.target.currentTime)}
+  on:timeupdate={e => {
+    $audio.currentTime = e.target.currentTime;
+  }}
   bind:this={$audio.ref} />
 <Nav {settings} segment={$page.path} />
 

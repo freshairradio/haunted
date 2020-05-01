@@ -124,6 +124,7 @@ export const post = async (ident) => {
 export const team = async (team) => {
   return {
     team,
+    hub_show: await show(data.hub_shows[team]),
     image: cache.team_images[team],
     posts: cache.posts
       .filter((p) =>
@@ -155,10 +156,11 @@ export const team = async (team) => {
 export const team_archive = async (team) => {
   return {
     team,
+    hub_show: await show(data.hub_shows[team]),
     image: cache.team_images[team],
     posts: cache.posts
       .filter((p) =>
-        p.tags.find((t) => t.slug == `hash-${team}-name` || t.slug == `${team}`)
+        p.tags.find((t) => t.slug == `hash-${team}-team` || t.slug == `${team}`)
       )
       .filter(({ tags }) => tags.find((t) => t.slug == 'hash-article'))
       .slice(18)

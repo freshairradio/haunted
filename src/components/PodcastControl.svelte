@@ -2,7 +2,7 @@
   import { audio } from "../util/audio.store.js";
   export let size = 50;
   export let podcast;
-  $: playing = !$audio.paused && $audio.src == podcast.src;
+  $: playing = !$audio.paused && $audio.src == podcast.audio;
 </script>
 
 <style>
@@ -16,6 +16,8 @@
     justify-content: center;
     align-content: center;
     cursor: pointer;
+    padding: 0px;
+    outline: none;
   }
   .control svg {
     width: inherit;
@@ -25,7 +27,7 @@
 
 <button
   class="control"
-  on:click={playing ? audio.pausePodcast : () => audio.playPodcast(podcast.src, podcast.image, podcast.title)}
+  on:click={playing ? audio.pausePodcast : () => audio.playPodcast(podcast)}
   style="width:{size}px;height:{size}px">
   {#if !playing}
     <svg id="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">

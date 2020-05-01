@@ -15,7 +15,8 @@
   import { audio, others } from "../util/audio.store.js";
   $: playing = !$audio.paused && $audio.src == podcast.audio;
   let canvas;
-
+  let ww;
+  let wh;
   onMount(() => {
     let canvasCtx = canvas.getContext("2d");
     let dataArray = new Uint8Array($audio.bufferLength);
@@ -24,7 +25,7 @@
     const draw = () => {
       frame = requestAnimationFrame(draw);
       if (!playing) return;
-      const WIDTH = w - 150;
+      const WIDTH = w - (ww <= 700 ? 0 : 150);
       const HEIGHT = h;
       $audio.analyser.getByteTimeDomainData(dataArray);
 
@@ -92,7 +93,7 @@
     margin: 40px;
     margin-bottom: 10px;
     background: #3c3c3c;
-    border-radius: 4px;
+    border-radius: 8px;
     grid-gap: 10px;
     height: 130px;
     padding: 10px 0px;
@@ -140,7 +141,8 @@
   .current {
     position: absolute;
     left: 150px;
-    height: 150px;
+    height: 10px;
+    bottom: 0px;
     background: white;
     opacity: 0.4;
   }
@@ -153,25 +155,43 @@
     font-size: 20px;
     color: white;
   }
+  @media (max-width: 700px) {
+    .podcast-image {
+      display: none;
+    }
+    .podcast {
+      grid-template-columns: 90px 1fr 40px 40px 0px;
+    }
+    .current {
+      left: 0px;
+    }
+    .waveform {
+      left: 0px;
+    }
+    .time {
+      display: none;
+    }
+  }
 </style>
+
+<svelte:window bind:innerWidth={ww} bind:innerHeight={wh} />
 
 <div class="podcast-container">
   <section class="podcast" bind:clientWidth={w} bind:clientHeight={h}>
     <img src={podcast.feature_image.small} class="podcast-image" />
 
-    <PodcastControl
-      podcast={{ src: podcast.audio, title: podcast.title, image: podcast.feature_image.small }} />
+    <PodcastControl {podcast} />
 
     <canvas
       style={!playing ? `display:none` : ``}
       class="waveform"
       bind:this={canvas}
-      width={w - 150}
+      width={w - (ww <= 700 ? 0 : 150)}
       height={h} />
     {#if $others && $others[podcast.audio]}
       <div
         class="current"
-        style="width:{($others[podcast.audio].current / $others[podcast.audio].duration) * (w - 150)}px" />
+        style="width:{($others[podcast.audio].current / $others[podcast.audio].duration) * (w - (ww <= 700 ? 0 : 150))}px" />
       <div class="time">
         {Math.round(($others[podcast.audio].duration - $others[podcast.audio].current) / 60).toString()}m
         left

@@ -73,14 +73,15 @@
 </style>
 
 <figure class={size}>
-  <img alt={$audio.image} class="feature" src={$audio.image} />
+  <img
+    alt={$audio.podcast && $audio.podcast.image}
+    class="feature"
+    src={$audio.podcast && $audio.podcast.feature_image && $audio.podcast.feature_image.small} />
   <div>
     <div class="feature-overlay" />
 
     <div class="control-container">
-      <PodcastControl
-        size={50}
-        podcast={{ src: $audio.src, image: $audio.image }} />
+      <PodcastControl size={50} podcast={$audio.podcast} />
 
       <div class="time">
         {Math.round(($audio.duration - $audio.currentTime) / 60).toString()}m

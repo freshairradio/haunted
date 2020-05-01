@@ -17,7 +17,9 @@
   export let posts;
   export let team;
   export let image;
-  const columns = [3, 4, 5];
+  let w;
+  let h;
+  const columns = w <= 1020 ? [3, 4] : [3, 4, 5];
 </script>
 
 <style>
@@ -28,29 +30,11 @@
     margin: 0px;
     display: grid;
     grid-gap: 30px;
-    grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
+    grid-template-columns: var(--sidebar-width) 1fr 300px 300px 300px 1fr 0px;
     justify-content: center;
     background: var(--black-90);
   }
-  .related-container {
-    display: grid;
-    background: var(--black-90);
-    grid-gap: 30px;
-    grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
-  }
-  .semester {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 1fr min-content min-content min-content 10px;
-    justify-items: end;
-    text-align: right;
-    grid-row: 2;
-    grid-column: 3/6;
-    justify-items: start;
-    text-align: left;
-    grid-template-columns: 0px 1fr 0px;
-  }
+
   .btitle {
     grid-column: 3/6;
     grid-row: 1;
@@ -67,28 +51,13 @@
     position: relative;
     justify-self: center;
   }
-  .semester .title {
-    padding-left: 80px;
-  }
-  .byline {
-    grid-column: 2;
-    grid-row: 3;
-    color: #fff;
-    font-family: "Equity Text B";
-    font-size: 40px;
-    line-height: 1.25;
-    margin: 0px;
-    font-weight: normal;
-    font-style: italic;
-  }
-  .related-container {
-    position: relative;
-    top: 100vh;
-    padding: 100px 0px;
-    display: grid;
-    background: var(--black-90);
-    grid-gap: 30px;
-    grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
+  @media (max-width: 1020px) {
+    .shows {
+      grid-template-columns: var(--sidebar-width) 1fr 300px 300px 1fr 0px;
+    }
+    .btitle {
+      grid-column: 3/5;
+    }
   }
   .related {
     position: relative;
@@ -129,7 +98,7 @@
   .cover {
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: var(--page-height);
     top: 0px;
     left: 0px;
     object-fit: cover;
@@ -189,8 +158,18 @@
     text-align: center;
     font-weight: 100;
   }
+  @media (max-width: 1020px) {
+    .bbutton {
+      grid-column: 3/5 !important;
+    }
+    .button {
+      grid-row: 12 !important;
+      grid-column: 3/5 !important;
+    }
+  }
 </style>
 
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} />
 <svelte:head>
   <title>All Shows</title>
 </svelte:head>
@@ -211,7 +190,7 @@
       href="/posts/{post.slug}"
       class="related"
       rel="prefetch"
-      style="grid-row:{Math.floor(i / 3) + 3};grid-column:{columns[i % 3]}">
+      style="grid-row:{w <= 1020 ? Math.floor(i / 2) + 3 : Math.floor(i / 3) + 3};grid-column:{w <= 1020 ? columns[i % 2] : columns[i % 3]}">
       <img class="cover" src={post.feature_image.small} />
       <div class="cover-overlay" />
       <div class="related-title-container">

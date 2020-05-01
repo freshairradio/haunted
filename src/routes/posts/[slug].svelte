@@ -27,12 +27,12 @@
 <style>
   .related-container {
     position: relative;
-    top: 100vh;
+    top: var(--page-height);
     padding: 100px 0px;
     display: grid;
     background: var(--black-90);
     grid-gap: 30px;
-    grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
+    grid-template-columns: var(--sidebar-width) 1fr 300px 300px 300px 1fr 0px;
   }
   .related {
     position: relative;
@@ -72,7 +72,7 @@
   .cover {
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: var(--page-height);
     top: 0px;
     left: 0px;
     object-fit: cover;
@@ -80,15 +80,15 @@
   }
   .cover-overlay {
     position: absolute;
-    height: 50vh;
+    height: var(--half-page-height);
     width: 100vw;
-    top: 50vh;
+    top: var(--half-page-height);
     left: 0px;
     background: linear-gradient(transparent, var(--black-90));
     transition: all 0.2s;
   }
   .cover-overlay.full {
-    height: 100vh;
+    height: var(--page-height);
     top: 0px;
     background: black;
   }
@@ -99,7 +99,7 @@
     text-transform: lowercase;
     font-size: 80px;
     line-height: 1.25;
-    top: calc(100vh - 120px);
+    top: calc(var(--page-height) - 120px);
     margin: 0px;
     right: 40px;
     font-weight: normal;
@@ -110,7 +110,7 @@
     font-family: "Equity Text B";
     font-size: 40px;
     line-height: 1.25;
-    top: calc(100vh - 160px);
+    top: calc(var(--page-height) - 160px);
     margin: 0px;
     right: 40px;
     font-weight: normal;
@@ -121,7 +121,7 @@
     font-family: "Equity Text B";
     font-size: 100px;
     line-height: 1;
-    top: calc(100vh - 220px);
+    top: calc(var(--page-height) - var(--sidebar-width));
     margin: 0px;
     right: 40px;
     font-weight: normal;
@@ -137,10 +137,10 @@
   }
   .content-container {
     position: relative;
-    top: 100vh;
+    top: var(--page-height);
     background: var(--black-90);
     display: grid;
-    grid-template-columns: 220px auto 700px auto;
+    grid-template-columns: var(--sidebar-width) auto 700px auto;
   }
   .content-container :global(.content) {
     grid-column: 3;
@@ -148,10 +148,10 @@
 
   .title-container {
     position: absolute;
-    left: 220px;
+    left: var(--sidebar-width);
     top: 0px;
-    height: 100vh;
-    width: calc(100vw - 220px);
+    height: var(--page-height);
+    width: calc(100vw - var(--sidebar-width));
   }
   .related-title-container {
     position: relative;

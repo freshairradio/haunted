@@ -9,7 +9,7 @@
   h1,
   p {
     margin: 0 auto;
-    margin-left: 220px;
+    margin-left: var(--sidebar-width);
   }
 
   h1 {

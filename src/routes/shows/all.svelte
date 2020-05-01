@@ -12,7 +12,9 @@
   import ShowCard from "../../components/ShowCard";
   import { nowplaying, currentShowInfo } from "../../util/nowplaying.store";
   export let shows;
-  const columns = [3, 4, 5];
+  let w;
+  let h;
+  const columns = w <= 1020 ? [3, 4] : [3, 4, 5];
 </script>
 
 <style>
@@ -20,10 +22,15 @@
     margin: 0px;
     display: grid;
     grid-gap: 30px;
-    grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
+    grid-template-columns: var(--sidebar-width) 1fr 300px 300px 300px 1fr 0px;
     grid-template-rows: 30px min-content;
     justify-content: center;
     padding-bottom: 100px;
+  }
+  @media (max-width: 1020px) {
+    .shows {
+      grid-template-columns: var(--sidebar-width) 1fr 300px 300px 1fr 0px;
+    }
   }
 
   .semester {
@@ -67,6 +74,7 @@
   }
 </style>
 
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} />
 <svelte:head>
   <title>All Shows</title>
 </svelte:head>
@@ -78,6 +86,6 @@
   {#each shows as show, i}
     <ShowCard
       {show}
-      style="grid-row:{Math.floor(i / 3) + 3};grid-column:{columns[i % 3]}" />
+      style="grid-row:{w <= 1020 ? Math.floor(i / 2) + 3 : Math.floor(i / 3) + 3};grid-column:{w <= 1020 ? columns[i % 2] : columns[i % 3]}" />
   {/each}
 </div>

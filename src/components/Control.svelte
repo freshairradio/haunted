@@ -16,6 +16,8 @@
     justify-content: center;
     align-content: center;
     cursor: pointer;
+    padding: 0px;
+    outline: none;
   }
   .control svg {
     width: inherit;

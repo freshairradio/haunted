@@ -1,9 +1,8 @@
 import { writable, derived } from 'svelte/store'
 import { throttle } from 'lodash'
 const { subscribe, set, update } = writable({
+  podcast: null,
   src: null,
-  image: null,
-  title: null,
   live: false,
   paused: true,
   volume: 0,
@@ -25,13 +24,14 @@ const throttledUpdate = throttle((v) => {
 const audio = {
   set,
   subscribe,
-  playPodcast: (src, image, title) => {
+  playPodcast: (podcast) => {
     return update((v) => {
-      v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
+      if (!/radio\.freshair/.test(v.src))
+        v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
 
-      let storedCurrent = v.others[src]
+      let storedCurrent = v.others[podcast.audio]
       if (!storedCurrent) {
-        v.others[src] = { current: 0, duration: 0 }
+        v.others[podcast.audio] = { current: 0, duration: 0 }
         storedCurrent = 0
       } else {
         storedCurrent = storedCurrent.current
@@ -43,9 +43,8 @@ const audio = {
       })
       return {
         ...v,
-        src,
-        image,
-        title,
+        podcast,
+        src: podcast.audio,
         live: false,
         volume: 1,
         paused: false,
@@ -63,7 +62,7 @@ const audio = {
       }
     })
   },
-  playLive: (image) => {
+  playLive: () => {
     return update((v) => {
       v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
 
@@ -74,10 +73,9 @@ const audio = {
         src: v.live
           ? v.src
           : 'https://radio.freshair.org.uk/radio?' + Date.now(),
-        image,
+
         live: true,
         paused: false,
-        title: null,
         volume: 1,
         currentTime: v.live ? v.currentTime : 0,
       }
@@ -93,6 +91,7 @@ const audio = {
   },
 }
 const others = derived(audio, ($audio) => {
+  if (/radio\.freshair/.test($audio.src)) return $audio.others
   return {
     ...$audio.others,
     [$audio.src]: { current: $audio.currentTime, duration: $audio.duration },

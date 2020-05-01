@@ -21,6 +21,16 @@ html {
   --grey-80: rgba(68, 68, 68, 0.8);
   --grey-50: rgba(68, 68, 68, 0.5);
   --grey-20: rgba(68, 68, 68, 0.2);
+  --sidebar-width: 220px;
+  --page-height: 100vh;
+  --half-page-height: 50vh;
+}
+@media (max-width: 1240px) {
+  :root {
+    --sidebar-width: 0px;
+    --page-height: calc(100vh - 60px);
+    --half-page-height: calc(50vh - 30px);
+  }
 }
 html,
 body {

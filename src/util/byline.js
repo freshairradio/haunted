@@ -10,13 +10,16 @@ const pluralise = (authors) => {
   return `${rest.join(', ')} and ${last}`
 }
 const s = (l) => (l.length > 1 ? '' : 's')
-export default (authors, tags, { isShow, isLive }) => {
+export default (authors, tags, { isShow, isLive, prefix }) => {
   const authorNames = pluralise(authors)
   if (!!isShow && !!isLive) {
     return `Live now with ${authorNames}`
   }
-  if (!!isShow) {
+  if (!!isShow && !prefix) {
     return `${authorNames} present${s(authors)}`
+  }
+  if (!!isShow && prefix) {
+    return `presented by ${authorNames}`
   }
   if (tags.find((t) => t.slug == 'hash-reviews' || t.slug == 'reviews')) {
     return `${authorNames} review${s(authors)}`
