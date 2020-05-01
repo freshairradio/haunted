@@ -20,6 +20,7 @@ const api = (path, query = '', options = {}) =>
         authors,
         html,
         feature_image,
+        published_at,
       } = post
       newPosts.push({
         slug,
@@ -39,13 +40,20 @@ const api = (path, query = '', options = {}) =>
           }))
         ),
         feature_image: await image(feature_image),
+        published_at,
       })
     }
 
-    console.log('Done')
     await fs.writeFile(
       './cache/ghostcache.json',
-      JSON.stringify({ settings, posts: newPosts })
+      JSON.stringify({
+        settings,
+        posts: newPosts,
+        team_images: {
+          music: await image('https://cdn.freshair.dev/assets/music2.png'),
+          arts: await image('https://cdn.freshair.dev/assets/arts.png'),
+        },
+      })
     )
   } catch (e) {
     console.error(e)

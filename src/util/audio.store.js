@@ -10,6 +10,8 @@ const { subscribe, set, update } = writable({
   currentTime: 0,
   duration: 0,
   ref: null,
+  analyser: null,
+  bufferLength: 16384,
   others:
     typeof window != 'undefined' && localStorage.getItem('currentTime')
       ? JSON.parse(localStorage.getItem('currentTime'))

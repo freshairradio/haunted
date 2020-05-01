@@ -10,22 +10,6 @@
   $: dimensions = size == "big" ? 400 : 200;
   $: isLive = $nowplaying === show.slug;
   let canvas;
-  const constructAnalyser = () => {
-    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let analyser = audioCtx.createAnalyser();
-
-    let source = audioCtx.createMediaElementSource($audio.ref);
-    source.connect(analyser);
-
-    analyser.connect(audioCtx.destination);
-    // analyser.connect(audioCtx.destination);
-
-    analyser.fftSize = 16384;
-    let bufferLength = analyser.fftSize;
-    let dataArray = new Uint8Array(bufferLength);
-    analyser.getByteTimeDomainData(dataArray);
-    return { analyser, dataArray, bufferLength };
-  };
 
   let radioExists = false;
   $: {
@@ -35,16 +19,15 @@
   }
   onMount(() => {
     let canvasCtx = canvas.getContext("2d");
-    let analyser;
-    let dataArray;
-    let bufferLength;
+    let dataArray = new Uint8Array($audio.bufferLength);
+    let bufferLength = $audio.bufferLength;
     let frame;
     const draw = () => {
       frame = requestAnimationFrame(draw);
       if (!$audio.live || !isLive) return;
       const WIDTH = dimensions;
       const HEIGHT = dimensions;
-      analyser.getByteTimeDomainData(dataArray);
+      $audio.analyser.getByteTimeDomainData(dataArray);
 
       canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
@@ -80,12 +63,7 @@
     };
     let timeout;
     const run = () => {
-      console.log("run", radioExists);
       if (radioExists) {
-        let m = constructAnalyser();
-        analyser = m.analyser;
-        dataArray = m.dataArray;
-        bufferLength = m.bufferLength;
         draw();
       } else {
         timeout = setTimeout(run, 500);

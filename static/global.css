@@ -118,3 +118,13 @@ body {
 a {
   text-decoration: none;
 }
+
+img {
+  font-family: Inter;
+  font-size: 18px;
+  color: white;
+  font-weight: 100;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}

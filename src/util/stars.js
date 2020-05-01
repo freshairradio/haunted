@@ -1,5 +1,4 @@
 export default (tags) => {
-  console.log(tags)
   const rating = tags.find(
     (t) => t.slug.endsWith('star') || t.slug.endsWith('stars')
   )

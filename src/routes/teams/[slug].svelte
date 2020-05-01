@@ -194,7 +194,7 @@
 <svelte:head>
   <title>All Shows</title>
 </svelte:head>
-<img class="cover" src={image.large} transition:fade />
+<img class="cover" src={image.large} />
 <div class="cover-overlay" />
 <div class="shows">
   <h1 class="btitle">{team} team</h1>

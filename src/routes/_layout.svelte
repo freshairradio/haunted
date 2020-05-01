@@ -11,6 +11,7 @@
 <script>
   import Nav from "../components/Nav.svelte";
   import { fade } from "svelte/transition";
+  import { onMount } from "svelte";
   import { audio } from "../util/audio.store.js";
   import { settings as store } from "../util/settings.store.js";
   export let settings;
@@ -19,6 +20,21 @@
   }
   import { stores } from "@sapper/app";
   const { preloading, page, session } = stores();
+  onMount(() => {
+    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let analyser = audioCtx.createAnalyser();
+
+    let source = audioCtx.createMediaElementSource($audio.ref);
+    source.connect(analyser);
+
+    analyser.connect(audioCtx.destination);
+
+    analyser.fftSize = $audio.bufferLength;
+    let bufferLength = analyser.fftSize;
+    let dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
+    $audio.analyser = analyser;
+  });
 </script>
 
 <style>
@@ -88,6 +104,7 @@
   </div>
 {/if} -->
 <audio
+  loop
   crossorigin="anonymous"
   src={$audio.src}
   bind:volume={$audio.volume}

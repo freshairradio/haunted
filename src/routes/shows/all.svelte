@@ -23,7 +23,7 @@
     grid-template-columns: 220px 1fr 300px 300px 300px 1fr 0px;
     grid-template-rows: 30px min-content;
     justify-content: center;
-    padding-bottom: 100;
+    padding-bottom: 100px;
   }
 
   .semester {

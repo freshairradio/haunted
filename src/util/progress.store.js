@@ -18,7 +18,6 @@ if (typeof window !== 'undefined')
     setTimeout(updateCurrent, 0)
     return Object.fromEntries(Object.entries(localStorage))
   })
-console.log('import p')
 export const progress = {
   subscribe,
 }

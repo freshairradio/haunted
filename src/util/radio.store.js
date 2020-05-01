@@ -6,13 +6,11 @@ const setup = (
   src = 'https://radio.freshair.org.uk/zetta?' + Date.now(),
   volume = 0
 ) => {
-  console.log('setup', force, src, !!window.radio)
   if (window && (!window.radio || force)) {
     if (force && !!window.radio) {
       window.radio.pause()
       window.radio = null
     }
-    console.log('Creating audio')
     window.radio = new Audio(src)
     window.radio.crossOrigin = 'anonymous'
     window.radio.volume = volume
@@ -24,7 +22,6 @@ export const live = {
   subscribe,
   pause_podcast: ({ src, title, img }) =>
     update((playing) => {
-      console.log('pause_podcast')
       setup(playing.podcast ? playing.podcast.src != src : true, src, 1)
       if (window && playing.playing) window.radio.pause()
       return {
@@ -35,8 +32,6 @@ export const live = {
     }),
   play_podcast: ({ src, title, img }) =>
     update((playing) => {
-      console.log('play_podcast')
-
       setup(playing.podcast ? playing.podcast.src != src : true, src, 1)
       if (window && !playing.playing) window.radio.play()
 

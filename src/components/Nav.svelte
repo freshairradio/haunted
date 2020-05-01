@@ -36,7 +36,8 @@
     z-index: 10;
     overflow-wrap: normal;
   }
-  nav a {
+  nav a,
+  nav .a {
     text-decoration: none;
     display: block;
     color: white;
@@ -45,6 +46,11 @@
     text-align: right;
     font-size: 24px;
     margin: 15px 0px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    font-family: Inter;
+    cursor: pointer;
   }
   nav a.selected {
     font-weight: 600;
@@ -101,6 +107,7 @@
         {link.label}
       </a>
     {/each}
+    <button class="a" on:click={audio.playLive}>listen live!</button>
   </section>
   <div class="logomark">
     <img src="https://cdn.freshair.dev/images/fallback.svg" />

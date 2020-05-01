@@ -15,64 +15,51 @@
   import { audio, others } from "../util/audio.store.js";
   $: playing = !$audio.paused && $audio.src == podcast.audio;
   let canvas;
-  const constructAnalyser = () => {
-    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let analyser = audioCtx.createAnalyser();
-
-    let source = audioCtx.createMediaElementSource($audio.ref);
-    source.connect(analyser);
-
-    analyser.connect(audioCtx.destination);
-    // analyser.connect(audioCtx.destination);
-
-    analyser.fftSize = 16384;
-    let bufferLength = analyser.fftSize;
-    let dataArray = new Uint8Array(bufferLength);
-    analyser.getByteTimeDomainData(dataArray);
-    return { analyser, dataArray, bufferLength };
-  };
 
   onMount(() => {
     let canvasCtx = canvas.getContext("2d");
-    let analyser;
-    let dataArray;
-    let bufferLength;
+    let dataArray = new Uint8Array($audio.bufferLength);
+    let bufferLength = $audio.bufferLength;
     let frame;
     const draw = () => {
       frame = requestAnimationFrame(draw);
       if (!playing) return;
       const WIDTH = w - 150;
       const HEIGHT = h;
-      analyser.getByteTimeDomainData(dataArray);
+      $audio.analyser.getByteTimeDomainData(dataArray);
 
       canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-      canvasCtx.lineWidth = 2;
       canvasCtx.strokeStyle = "#ff8810";
       canvasCtx.fillStyle = "#ff8810";
 
-      let sliceWidth = ((WIDTH * 1.0) / bufferLength) * 32;
+      let sliceWidth = (WIDTH * 1.0) / (bufferLength / 64);
+      canvasCtx.lineWidth = sliceWidth / 2;
+
       let x = 0;
       //   let y = 0;
       let lastV = 0;
       let zeroes = [];
       canvasCtx.beginPath();
 
-      for (let i = 0; i < bufferLength; i += 32) {
+      for (let i = 0; i < bufferLength; i += 64) {
         let avg =
-          dataArray.slice(i, i + 32).reduce((acc, e) => acc + e, 0) / 32;
+          dataArray.slice(i, i + 64).reduce((acc, e) => acc + e, 0) / 64;
         var v = avg / 128.0;
         var y = (v * HEIGHT) / 2;
-
+        var otherV = v == 1 ? v : v > 1 ? 1 - (v - 1) : 1 + (1 - v);
+        var otherY = (otherV * HEIGHT) / 2;
         if (i === 0) {
           canvasCtx.moveTo(x, y);
         } else {
-          canvasCtx.lineTo(x, y);
+          canvasCtx.moveTo(x, y);
+
+          canvasCtx.lineTo(x, otherY);
         }
 
         x += sliceWidth;
       }
-      canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+      // canvasCtx.lineTo(WIDTH, HEIGHT / 2);
       canvasCtx.stroke();
       canvasCtx.closePath();
       return;
@@ -80,10 +67,6 @@
     let timeout;
     const run = () => {
       if (playing) {
-        let m = constructAnalyser();
-        analyser = m.analyser;
-        dataArray = m.dataArray;
-        bufferLength = m.bufferLength;
         draw();
       } else {
         timeout = setTimeout(run, 500);

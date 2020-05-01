@@ -45,13 +45,15 @@ const normalise = async (url) => {
       contentLength: headers['content-length'],
     }
   } catch (e) {
-    // console.error(e)
+    console.error(e)
     return { data: null, contentType: null, err: true }
   }
 }
 
 const get = async (img) => {
   const normalised = normalise_url(img)
+  console.log('Tryign', normalised)
+
   if (
     process.env.NODE_ENV == 'development' ||
     normalised == 'https://cdn.freshair.dev/images/fallback.svg'
@@ -69,7 +71,6 @@ const get = async (img) => {
   }
 
   const { data, contentType, contentLength, err } = await normalise(normalised)
-  console.log(normalised, contentType, contentLength)
   if (err) {
     return {
       small: 'https://cdn.freshair.dev/images/fallback.svg',
@@ -84,7 +85,6 @@ const get = async (img) => {
     ACL: 'public-read',
     ContentType: 'image/jpeg',
   }
-  console.log('Ready to upload', normalised)
   await s3
     .putObject({
       ...params,
@@ -95,7 +95,6 @@ const get = async (img) => {
       Key: `images/large/${hash}`,
     })
     .promise()
-  console.log('Uploaded', normalised)
 
   await s3
     .putObject({
