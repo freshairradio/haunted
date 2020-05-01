@@ -1,0 +1,4 @@
+node_modules
+__sapper__
+cache/ghostcache.json
+src/node_modules
