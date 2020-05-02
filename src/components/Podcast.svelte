@@ -90,7 +90,7 @@
   .podcast {
     display: grid;
     position: relative;
-    margin: 40px;
+    margin: 20px;
     margin-bottom: 10px;
     background: #3c3c3c;
     border-radius: 8px;

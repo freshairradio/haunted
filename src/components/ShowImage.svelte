@@ -7,7 +7,7 @@
   import { audio } from "../util/audio.store.js";
   export let show;
   export let size = "big";
-  $: dimensions = size == "big" ? 400 : 200;
+  $: dimensions = Math.min(size == "big" ? 400 : 200, ww - 40);
   $: isLive = $nowplaying === show.slug;
   let canvas;
 
@@ -17,6 +17,8 @@
       radioExists = true;
     }
   }
+  let ww;
+  let wh;
   onMount(() => {
     let canvasCtx = canvas.getContext("2d");
     let dataArray = new Uint8Array($audio.bufferLength);
@@ -89,8 +91,6 @@
   .feature,
   .feature-overlay,
   .control-container {
-    height: 400px;
-    width: 400px;
     border-radius: 8px;
   }
   figure.small,
@@ -128,10 +128,10 @@
     margin-bottom: 10px;
   }
   .waveform {
-    width: 400px;
-    height: 400px;
     position: absolute;
     top: 0px;
+  }
+  @media (max-width: 440px) {
   }
   figure.small .waveform {
     width: 200px;
@@ -142,8 +142,13 @@
   }
 </style>
 
-<figure class={size}>
-  <img alt={show.title} class="feature" src={show.feature_image.large} />
+<svelte:window bind:innerWidth={ww} bind:innerHeight={wh} />
+<figure class={size} style="width:{dimensions}px;height:{dimensions}px">
+  <img
+    alt={show.title}
+    class="feature"
+    src={show.feature_image.large}
+    style="width:{dimensions}px;height:{dimensions}px" />
   <div class:hide={!isLive}>
     {#if $audio.live}
       <div class="feature-overlay" />
@@ -154,7 +159,9 @@
       bind:this={canvas}
       width={dimensions}
       height={dimensions} />
-    <div class="control-container">
+    <div
+      class="control-container"
+      style="width:{dimensions}px;height:{dimensions}px">
       <Control size={size == 'big' ? 60 : 50} />
     </div>
   </div>

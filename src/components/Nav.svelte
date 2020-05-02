@@ -69,7 +69,7 @@
     font-weight: 100;
     text-transform: lowercase;
     text-align: right;
-    font-size: 24px;
+    font-size: var(--fs-ui);
     margin: 15px 0px;
     background: transparent;
     border: none;
@@ -138,7 +138,7 @@
     display: block;
     margin: 10px 0px;
     border-radius: 8px;
-    font-size: 21px;
+    font-size: var(--fs-normal);
     padding: 5px;
     font-family: Equity Text B;
     text-transform: lowercase;
@@ -196,7 +196,7 @@
       background: transparent;
       left: 80px;
       border-radius: 0px;
-      font-size: 24px;
+      font-size: var(--fs-ui);
       text-align: left;
       width: initial;
       color: var(--orange);
@@ -237,6 +237,20 @@
     justify-items: center;
     margin-top: 40px;
   }
+  @media (max-width: 700px) {
+    .byline {
+      display: none;
+    }
+    .logomark {
+      display: none;
+    }
+    nav {
+      grid-template-columns: 1fr 80px;
+    }
+    .openmenu .show {
+      display: none;
+    }
+  }
 </style>
 
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} />
@@ -248,7 +262,7 @@
       <a href="/shows/{$currentShowInfo.slug}" class="title">
         {$currentShowInfo.title}
         {#if w <= 1240}
-          <em>{parsed_byline}</em>
+          <em class="byline">{parsed_byline}</em>
         {/if}
       </a>
     {:else if !$audio.live && $audio.podcast}

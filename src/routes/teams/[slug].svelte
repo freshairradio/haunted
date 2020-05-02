@@ -43,7 +43,7 @@
     color: var(--orange);
     font-family: "Equity Text B";
     text-transform: lowercase;
-    font-size: 80px;
+    font-size: var(--fs-main-big);
     line-height: 1.25;
     margin: 0px;
     font-weight: normal;
@@ -127,7 +127,7 @@
     height: 60px;
     border-radius: 8px;
     line-height: 60px;
-    font-size: 24px;
+    font-size: var(--fs-ui);
     padding: 0px 40px;
     text-decoration: none;
     color: white;
@@ -146,7 +146,7 @@
     height: 60px;
     border-radius: 8px;
     line-height: 60px;
-    font-size: 24px;
+    font-size: var(--fs-ui);
     padding: 0px 40px;
     text-decoration: none;
     color: white;

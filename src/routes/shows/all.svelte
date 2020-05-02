@@ -32,6 +32,11 @@
       grid-template-columns: var(--sidebar-width) 1fr 300px 300px 1fr 0px;
     }
   }
+  @media (max-width: 700px) {
+    .shows {
+      grid-template-columns: var(--sidebar-width) 1fr 300px 1fr 0px;
+    }
+  }
 
   .semester {
     width: 100%;
@@ -53,20 +58,20 @@
     color: var(--orange);
     font-family: "Equity Text B";
     text-transform: lowercase;
-    font-size: 80px;
+    font-size: var(--fs-main-big);
     line-height: 1.25;
     margin: 0px;
     font-weight: normal;
   }
   .semester .title {
-    padding-left: 80px;
+    padding-left: var(--fs-main-big);
   }
   .byline {
     grid-column: 2;
     grid-row: 3;
     color: #fff;
     font-family: "Equity Text B";
-    font-size: 40px;
+    font-size: var(--fs-secondary-big);
     line-height: 1.25;
     margin: 0px;
     font-weight: normal;
@@ -86,6 +91,6 @@
   {#each shows as show, i}
     <ShowCard
       {show}
-      style="grid-row:{w <= 1020 ? Math.floor(i / 2) + 3 : Math.floor(i / 3) + 3};grid-column:{w <= 1020 ? columns[i % 2] : columns[i % 3]}" />
+      style="grid-row:{w <= 1020 ? (w <= 700 ? i + 3 : Math.floor(i / 2) + 3) : Math.floor(i / 3) + 3};grid-column:{w <= 1020 ? (w <= 700 ? 3 : columns[i % 2]) : columns[i % 3]}" />
   {/each}
 </div>

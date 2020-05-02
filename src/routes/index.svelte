@@ -164,7 +164,7 @@
     position: absolute;
   }
   figure {
-    left: -var(--sidebar-width);
+    left: var(--ne-sidebar-width);
   }
   .control-container {
     position: absolue;
@@ -258,64 +258,6 @@
     left: 0px;
     background: linear-gradient(transparent, var(--black-90));
     transition: all 0.2s;
-  }
-  .cover-overlay.full {
-    height: var(--page-height);
-    top: 0px;
-    background: black;
-  }
-  .title {
-    position: absolute;
-    color: var(--orange);
-    font-family: "Equity Text B";
-    text-transform: lowercase;
-    font-size: 80px;
-    line-height: 1.25;
-    top: calc(var(--page-height) - 120px);
-    margin: 0px;
-    right: 40px;
-    font-weight: normal;
-  }
-  .byline {
-    position: absolute;
-    color: #fff;
-    font-family: "Equity Text B";
-    font-size: 40px;
-    line-height: 1.25;
-    top: calc(var(--page-height) - 160px);
-    margin: 0px;
-    right: 40px;
-    font-weight: normal;
-    font-style: italic;
-  }
-  .stars {
-    position: absolute;
-    font-family: "Equity Text B";
-    font-size: 100px;
-    line-height: 1;
-    top: calc(var(--page-height) - var(--sidebar-width));
-    margin: 0px;
-    right: 40px;
-    font-weight: normal;
-    display: flex;
-    flex-direction: row-reverse;
-  }
-  .stars span {
-    display: inline-block;
-    color: white;
-  }
-  .stars .orange {
-    color: var(--orange);
-  }
-  .content-container {
-    position: relative;
-    top: var(--page-height);
-    background: var(--black-90);
-    display: grid;
-    grid-template-columns: var(--sidebar-width) auto 700px auto;
-  }
-  .content-container :global(.content) {
-    grid-column: 3;
   }
 
   .title-container {

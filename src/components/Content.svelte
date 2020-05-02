@@ -5,13 +5,13 @@
 <style>
   .content :global(*) {
     color: white;
-    font-size: 21px;
+    font-size: var(--fs-normal);
     line-height: 1.45;
     font-weight: 100;
   }
   .content :global(strong) {
     color: white;
-    font-size: 21px;
+    font-size: var(--fs-normal);
     line-height: 1.45;
     font-weight: normal;
   }

@@ -50,20 +50,20 @@
     color: var(--orange);
     font-family: "Equity Text B";
     text-transform: lowercase;
-    font-size: 80px;
+    font-size: var(--fs-main-big);
     line-height: 1.25;
     margin: 0px;
     font-weight: normal;
   }
   .heading.show .title {
-    padding-left: 80px;
+    padding-left: var(--fs-main-big);
   }
   .byline {
     grid-column: 2;
     grid-row: 3;
     color: #fff;
     font-family: "Equity Text B";
-    font-size: 40px;
+    font-size: var(--fs-secondary-big);
     line-height: 1.25;
     margin: 0px;
     font-weight: normal;
@@ -79,10 +79,10 @@
     margin: 4px 0px;
   }
   .mini .title {
-    font-size: 36px;
+    font-size: var(--fs-main-small);
   }
   .mini .byline {
-    font-size: 22px;
+    font-size: var(--fs-secondary-small);
   }
   .mini svg {
     width: 30px;

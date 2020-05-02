@@ -22,14 +22,38 @@ html {
   --grey-50: rgba(68, 68, 68, 0.5);
   --grey-20: rgba(68, 68, 68, 0.2);
   --sidebar-width: 220px;
+  --ne-sidebar-width: -220px;
   --page-height: 100vh;
   --half-page-height: 50vh;
+  --fs-main-big: 80px;
+  --fs-main-small: 36px;
+  --fs-secondary-big: 40px;
+  --fs-secondary-small: 22px;
+  --fs-normal: 21px;
+  --fs-ui: 24px;
 }
 @media (max-width: 1240px) {
   :root {
     --sidebar-width: 0px;
     --page-height: calc(100vh - 60px);
     --half-page-height: calc(50vh - 30px);
+    --ne-sidebar-width: 0px;
+  }
+}
+@media (max-width: 780px) {
+  :root {
+    /* --fs-main-big: 40px; */
+    --fs-main-small: 28px;
+    /* --fs-secondary-big: 24px; */
+    --fs-secondary-small: 18px;
+    --fs-normal: 18px;
+    --fs-ui: 21px;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --fs-main-big: 48px;
+    --fs-secondary-big: 24px;
   }
 }
 html,
