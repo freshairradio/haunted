@@ -11,6 +11,12 @@
 <script>
   import ShowCard from "../../../components/ShowCard";
   import Heading from "../../../components/Heading";
+  import ImagePage from "../../../components/ImagePage";
+  import Section from "../../../components/Section";
+  import Grid from "../../../components/Grid";
+  import Post from "../../../components/Post";
+  import Link from "../../../components/Link";
+  import Title from "../../../components/Title";
   import { nowplaying, currentShowInfo } from "../../../util/nowplaying.store";
   export let posts;
   export let team;
@@ -184,27 +190,13 @@
 <svelte:head>
   <title>All Shows</title>
 </svelte:head>
-<div class="shows">
-  <div class="semester">
-    <h2 class="byline">Freshair Archive</h2>
-    <h1 class="title">{team} team</h1>
-  </div>
-  {#each posts as post, i}
-    <a
-      href="/posts/{post.slug}"
-      class="related"
-      rel="prefetch"
-      style="grid-row:{Math.floor(i / 3) + 3};grid-column:{columns[i % 3]}">
-      <img class="cover" src={post.feature_image.small} />
-      <div class="cover-overlay" />
-      <div class="related-title-container">
-        <Heading
-          tags={post.tags}
-          authors={post.authors}
-          title={post.title}
-          mini />
-      </div>
-
-    </a>
-  {/each}
-</div>
+<ImagePage image={image.large} top="50vh">
+  <Section top="50vh">
+    <Title centred>{team} team archive</Title>
+    <Grid>
+      {#each posts as post, i}
+        <Post {post} />
+      {/each}
+    </Grid>
+  </Section>
+</ImagePage>

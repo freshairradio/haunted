@@ -1,10 +1,11 @@
 <script>
   export let slug = "nothing";
-  export let tags;
-  export let authors;
-  export let title;
+  export let tags = [];
+  export let authors = [];
+  export let title = "";
   export let mini;
   export let published;
+
   import { nowplaying } from "../util/nowplaying.store.js";
 
   import image from "../util/image.js";
@@ -55,6 +56,7 @@
     margin: 0px;
     font-weight: normal;
   }
+
   .heading.show .title {
     padding-left: var(--fs-main-big);
   }

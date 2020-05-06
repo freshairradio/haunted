@@ -24,17 +24,24 @@
     let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let analyser = audioCtx.createAnalyser();
 
-    let source = audioCtx.createMediaElementSource($audio.ref);
-    source.connect(analyser);
+    // let source = audioCtx.createMediaElementSource($audio.ref);
+    // source.connect(analyser);
 
-    analyser.connect(audioCtx.destination);
+    // analyser.connect(audioCtx.destination);
 
-    analyser.fftSize = $audio.bufferLength;
-    let bufferLength = analyser.fftSize;
-    let dataArray = new Uint8Array(bufferLength);
-    analyser.getByteTimeDomainData(dataArray);
+    // analyser.fftSize = $audio.bufferLength;
+    // let bufferLength = analyser.fftSize;
+    // let dataArray = new Uint8Array(bufferLength);
+    // analyser.getByteTimeDomainData(dataArray);
     $audio.analyser = analyser;
   };
+  let w;
+  let h;
+  $: {
+    if (typeof document != "undefined") {
+      document.documentElement.style.setProperty("--vh", `${h / 100}px`);
+    }
+  }
   if (typeof document != "undefined")
     document.addEventListener("click", analyse, { once: true });
 </script>
@@ -82,6 +89,8 @@
   }
 </style>
 
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} />
+
 <svelte:head>
   <!-- {#if $preloading}
     <style>
@@ -119,4 +128,5 @@
 
 <main>
   <slot />
+
 </main>

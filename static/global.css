@@ -8,6 +8,8 @@ html {
   }
 }
 :root {
+  --vh: 1vh;
+
   --orange: #ff8810;
   --orange-90: rgba(255, 136, 16, 0.9);
   --orange-80: rgba(255, 136, 16, 0.8);
@@ -23,8 +25,8 @@ html {
   --grey-20: rgba(68, 68, 68, 0.2);
   --sidebar-width: 220px;
   --ne-sidebar-width: -220px;
-  --page-height: 100vh;
-  --half-page-height: 50vh;
+  --page-height: calc(var(--vh) * 100);
+  --half-page-height: calc(var(--vh) * 50);
   --fs-main-big: 80px;
   --fs-main-small: 36px;
   --fs-secondary-big: 40px;
@@ -35,8 +37,8 @@ html {
 @media (max-width: 1240px) {
   :root {
     --sidebar-width: 0px;
-    --page-height: calc(100vh - 60px);
-    --half-page-height: calc(50vh - 30px);
+    --page-height: calc(calc(var(--vh) * 100) - 60px);
+    --half-page-height: calc(calc(var(--vh) * 50) - 30px);
     --ne-sidebar-width: 0px;
   }
 }
@@ -61,7 +63,6 @@ body {
   margin: 0px;
   background: var(--black);
   overflow-wrap: anywhere;
-  hyphens: auto;
 }
 
 .loader {

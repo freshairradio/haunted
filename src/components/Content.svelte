@@ -20,7 +20,21 @@
   }
   .content :global(figure img) {
     width: 100%;
-    border-radius: 8px;
+    /* border-radius: 8px; */
+  }
+  .content :global(figure) {
+    margin: -30px;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  @media (max-width: 360px) {
+    .content :global(figure) {
+      margin: calc(0px - calc(calc(100vw - 300px) / 2));
+
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
   }
 </style>
 
