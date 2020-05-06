@@ -6,7 +6,7 @@ export async function get(req, res) {
   const { slug } = req.params
   const show_data = await show(slug)
   res.writeHead(200, {
-    'Content-Type': 'application/rss+xml',
+    'Content-Type': 'text',
   })
 
   /* lets create an rss feed */
@@ -32,6 +32,7 @@ export async function get(req, res) {
       title: p.title,
       description: p.content,
       url: `https://freshair.radio/shows/${show_data.slug}`, // link to the item
+      enclosure: { url: p.audio, type: 'audio/mp3' }, // optional enclosure
       guid: p.audio, // optional - defaults to url
       date: p.exact_published, // any format that js Date can parse.
       itunesExplicit: false,
