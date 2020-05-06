@@ -58,6 +58,7 @@ export const show = async (ident) => {
           content: match[2],
           audio: match[1],
           feature_image,
+          exact_published: published_at,
           published_at: moment(published_at).fromNow(),
         }
       }
