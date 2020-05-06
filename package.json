@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "sapper dev --no-hot",
     "build": "sapper build",
-    "export": "node cache/preload.js && sapper export --timeout 100000 --entry / /teams/arts /teams/music /shows/all",
+    "export": "node cache/preload.js && sapper export --timeout 100000 --entry \"/ /teams/arts /teams/music /shows/all\"",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
