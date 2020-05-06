@@ -84,7 +84,7 @@
   </div>
   <div class="content-container">
 
-    <Social />
+    <Social {show} />
     <h2>mondays at 6pm</h2>
 
     <Content html={show.html} />
