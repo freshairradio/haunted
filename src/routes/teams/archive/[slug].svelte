@@ -1,7 +1,7 @@
 <script context="module">
   export function preload({ path, params, query }) {
     return this.fetch(`teams/archive/${params.slug}.json`)
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(({ posts, team, image }) => {
         return { posts, team, image };
       });
@@ -53,7 +53,7 @@
     grid-column: 2;
     grid-row: 4;
     color: var(--orange);
-    font-family: "Equity Text B";
+    font-family: "Equity";
     text-transform: lowercase;
     font-size: 80px;
     line-height: 1.25;
@@ -67,7 +67,7 @@
     grid-column: 2;
     grid-row: 3;
     color: #fff;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     font-size: 40px;
     line-height: 1.25;
     margin: 0px;
@@ -144,7 +144,7 @@
 
   .stars {
     position: absolute;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     font-size: 100px;
     line-height: 1;
     top: calc(var(--page-height) - var(--sidebar-width));

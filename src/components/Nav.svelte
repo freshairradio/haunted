@@ -1,17 +1,17 @@
 <script>
-  import { nowplaying, currentShowInfo } from '../util/nowplaying.store'
-  import { audio } from '../util/audio.store'
-  import ShowImage from './ShowImage.svelte'
-  import byline from '../util/byline.js'
+  import { nowplaying, currentShowInfo } from "../util/nowplaying.store";
+  import { audio } from "../util/audio.store";
+  import ShowImage from "./ShowImage.svelte";
+  import byline from "../util/byline.js";
 
-  import PodcastImage from './PodcastImage.svelte'
-  import Podcast from './Podcast.svelte'
-  import Control from './Control'
-  export let segment
-  export let settings
-  import { onMount } from 'svelte'
-  let w
-  let h
+  import PodcastImage from "./PodcastImage.svelte";
+  import Podcast from "./Podcast.svelte";
+  import Control from "./Control";
+  export let segment;
+  export let settings;
+  import { onMount } from "svelte";
+  let w;
+  let h;
   // const updateBroadcastInfo = async () => {
   //   let b = await fetch("https://nowplaying.freshair.org.uk").then(r =>
   //     r.json()
@@ -25,7 +25,7 @@
 
   $: currentShowImage = $currentShowInfo.feature_image
     ? $currentShowInfo.feature_image.small
-    : `https://cdn.freshair.radio/images/fallback.svg`
+    : `https://cdn.freshair.radio/images/fallback.svg`;
 
   $: parsed_byline = byline(
     $currentShowInfo.authors || [],
@@ -35,17 +35,17 @@
       isLive: $audio.live,
       prefix: true
     }
-  )
-  let menuOpen = false
+  );
+  let menuOpen = false;
   const toggleMenu = () => {
     if (menuOpen) {
-      document.body.style.overflow = 'auto'
-      menuOpen = false
+      document.body.style.overflow = "auto";
+      menuOpen = false;
     } else {
-      document.body.style.overflow = 'hidden'
-      menuOpen = true
+      document.body.style.overflow = "hidden";
+      menuOpen = true;
     }
-  }
+  };
 </script>
 
 <style>
@@ -140,7 +140,7 @@
     border-radius: 8px;
     font-size: var(--fs-normal);
     padding: 5px;
-    font-family: Equity Text B;
+    font-family: Equity;
     text-transform: lowercase;
     color: var(--orange);
     text-align: center;
@@ -261,16 +261,12 @@
       <ShowImage show={$currentShowInfo} size="small" />
       <a href="/shows/{$currentShowInfo.slug}" class="title">
         {$currentShowInfo.title}
-        {#if w <= 1240}
-          <em class="byline">{parsed_byline}</em>
-        {/if}
+        {#if w <= 1240}<em class="byline">{parsed_byline}</em>{/if}
       </a>
     {:else if !$audio.live && $audio.podcast}
       <PodcastImage size="small" />
       <section class="title">{$audio.podcast.title}</section>
-    {:else}
-      <img class="current" src={currentShowImage} />
-    {/if}
+    {:else}<img class="current" src={currentShowImage} />{/if}
   </section>
   {#if w > 1240}
     <section class="links">
@@ -283,10 +279,7 @@
     </section>
   {/if}
   <a class="logomark" href="/">
-    <h1>
-      fresh
-      <strong>air</strong>
-    </h1>
+    <h1>fresh <strong>air</strong></h1>
   </a>
   {#if w <= 1240}
     <button class="menu" on:click={toggleMenu}>
@@ -333,7 +326,6 @@
       </svg>
     </button>
   {/if}
-
 </nav>
 {#if w <= 1240 && menuOpen}
   <div class="openmenu">
@@ -342,9 +334,7 @@
         <ShowImage show={$currentShowInfo} />
       {:else if !$audio.live && $audio.podcast}
         <Podcast podcast={$audio.podcast} />
-      {:else}
-        <img class="current" src={currentShowImage} />
-      {/if}
+      {:else}<img class="current" src={currentShowImage} />{/if}
     </section>
     <section class="links">
       {#each settings.navigation as link}

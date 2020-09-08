@@ -13,10 +13,10 @@
   import byline from "../util/byline.js";
   $: isLive = $nowplaying === slug;
 
-  $: isShow = !!tags.find(t => t.slug == "hash-show");
+  $: isShow = !!tags.find((t) => t.slug == "hash-show");
 
-  $: isPost = !!tags.find(t => t.slug == "hash-article");
-  $: isPodcast = !!tags.find(t => t.slug == "hash-podcast");
+  $: isPost = !!tags.find((t) => t.slug == "hash-article");
+  $: isPodcast = !!tags.find((t) => t.slug == "hash-podcast");
   $: parsed_byline = byline(authors, tags, { isShow, isLive });
   $: rating = stars(tags);
 </script>
@@ -49,7 +49,7 @@
     grid-column: 2;
     grid-row: 4;
     color: var(--orange);
-    font-family: "Equity Text B";
+    font-family: "Equity";
     text-transform: lowercase;
     font-size: var(--fs-main-big);
     line-height: 1.25;
@@ -64,7 +64,7 @@
     grid-column: 2;
     grid-row: 3;
     color: #fff;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     font-size: var(--fs-secondary-big);
     line-height: 1.25;
     margin: 0px;
@@ -74,7 +74,7 @@
   .stars {
     grid-column: 2;
     grid-row: 2;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     display: flex;
     margin: 0px;
     font-weight: normal;
@@ -149,10 +149,8 @@
           </g>
         </svg>
       {/each}
-
     </div>
   {/if}
   <h2 class="byline">{isPodcast ? `published ${published}` : parsed_byline}</h2>
   <h1 class="title">{title}</h1>
-
 </div>

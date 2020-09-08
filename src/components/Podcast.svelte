@@ -150,7 +150,7 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     font-style: italic;
     font-size: 20px;
     color: white;
@@ -203,7 +203,6 @@
       title={podcast.title}
       published={podcast.published_at}
       mini />
-
   </section>
   <div class="content">
     {#if podcast.content}

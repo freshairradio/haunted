@@ -65,7 +65,7 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    font-family: "Equity Text B";
+    font-family: "Equity";
     font-style: italic;
     font-size: 20px;
     color: white;

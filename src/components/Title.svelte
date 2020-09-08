@@ -5,7 +5,7 @@
 <style>
   h1 {
     color: var(--orange);
-    font-family: "Equity Text B";
+    font-family: "Equity";
     text-transform: lowercase;
     font-size: var(--fs-main-big);
     line-height: 1.25;

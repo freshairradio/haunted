@@ -57,7 +57,7 @@
   h2 {
     margin: 0px;
     color: var(--orange);
-    font-family: "Equity Text B";
+    font-family: "Equity";
     text-transform: lowercase;
     font-weight: normal;
     font-size: 28px;
@@ -83,7 +83,6 @@
     <ShowImage {show} />
   </div>
   <div class="content-container">
-
     <Social {show} />
     <h2>mondays at 6pm</h2>
 
