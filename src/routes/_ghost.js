@@ -1,19 +1,19 @@
-import moment from 'moment'
-import fs from 'fs'
-const cache = JSON.parse(fs.readFileSync('./cache/ghostcache.json'))
-import data from './_extra.yaml'
-export const settings = () => cache.settings
+import moment from "moment";
+import fs from "fs";
+const cache = JSON.parse(fs.readFileSync("./cache/ghostcache.json"));
+import data from "./_extra.yaml";
+export const settings = () => cache.settings;
 export const shows = async () =>
   cache.posts
-    .filter((p) => p.tags.find((t) => t.slug == 'hash-show'))
-    .filter((s) => data.onair.includes(s.slug))
+    .filter((p) => p.tags.find((t) => t.slug == "hash-show"))
+    .filter((s) => data.onair.includes(s.slug));
 export const posts = async () =>
-  cache.posts.filter((p) => p.tags.find((t) => t.slug == 'hash-article'))
+  cache.posts.filter((p) => p.tags.find((t) => t.slug == "hash-article"));
 
 export const home = async () =>
   cache.posts
-    .filter((p) => p.tags.find((t) => t.slug == 'hash-article'))
-    .slice(0, 6)
+    .filter((p) => p.tags.find((t) => t.slug == "hash-article"))
+    .slice(0, 6);
 
 export const show = async (ident) => {
   let {
@@ -23,12 +23,12 @@ export const show = async (ident) => {
     primary_author,
     authors,
     html,
-    feature_image,
-  } = cache.posts.find((p) => p.slug === ident)
+    feature_image
+  } = cache.posts.find((p) => p.slug === ident);
 
   let podcasts = cache.posts
     .filter((p) => p.tags.find((t) => t.slug == `hash-${slug}`))
-    .filter(({ tags }) => tags.find((t) => t.slug == 'hash-podcast'))
+    .filter(({ tags }) => tags.find((t) => t.slug == "hash-podcast"))
     .filter((p) => p.slug != ident)
     .map(
       ({
@@ -39,14 +39,14 @@ export const show = async (ident) => {
         authors,
         html,
         feature_image,
-        published_at,
+        published_at
       }) => {
         // Awful, horrible hack
         let match = html.match(
           /<!--kg-card-begin: html--><audio src="(.*?)" controls><\/audio><!--kg-card-end: html-->(.*)/
-        )
+        );
         if (!match || !match[2]) {
-          return false
+          return false;
         }
         return {
           slug,
@@ -56,14 +56,14 @@ export const show = async (ident) => {
           primary_author,
           authors,
           content: match[2],
-          audio: match[1],
+          audio: match[1].replace("cdn.freshair.dev", "cdn.freshair.radio"),
           feature_image,
           exact_published: published_at,
-          published_at: moment(published_at).fromNow(),
-        }
+          published_at: moment(published_at).fromNow()
+        };
       }
     )
-    .filter(Boolean)
+    .filter(Boolean);
   return {
     slug,
     title,
@@ -72,9 +72,9 @@ export const show = async (ident) => {
     authors,
     html,
     feature_image,
-    podcasts,
-  }
-}
+    podcasts
+  };
+};
 export const post = async (ident) => {
   let {
     slug,
@@ -83,13 +83,13 @@ export const post = async (ident) => {
     primary_author,
     authors,
     html,
-    feature_image,
-  } = cache.posts.find((p) => p.slug === ident)
-  let team = tags.find((t) => t.slug.endsWith('team'))
+    feature_image
+  } = cache.posts.find((p) => p.slug === ident);
+  let team = tags.find((t) => t.slug.endsWith("team"));
   let related = team
     ? cache.posts
         .filter((p) => p.tags.find((t) => t.slug == `${team.slug}`))
-        .filter(({ tags }) => tags.find((t) => t.slug == 'hash-article'))
+        .filter(({ tags }) => tags.find((t) => t.slug == "hash-article"))
         .filter((p) => p.slug != ident)
         .slice(0, 3)
         .map(
@@ -100,17 +100,17 @@ export const post = async (ident) => {
             primary_author,
             authors,
             html,
-            feature_image,
+            feature_image
           }) => ({
             slug,
             title,
             tags,
             primary_author,
             authors,
-            feature_image,
+            feature_image
           })
         )
-    : []
+    : [];
   return {
     slug,
     title,
@@ -119,9 +119,9 @@ export const post = async (ident) => {
     authors,
     html,
     feature_image,
-    related,
-  }
-}
+    related
+  };
+};
 export const team = async (team) => {
   return {
     team,
@@ -131,7 +131,7 @@ export const team = async (team) => {
       .filter((p) =>
         p.tags.find((t) => t.slug == `hash-${team}-team` || t.slug == `${team}`)
       )
-      .filter(({ tags }) => tags.find((t) => t.slug == 'hash-article'))
+      .filter(({ tags }) => tags.find((t) => t.slug == "hash-article"))
       .slice(0, 18)
       .map(
         ({
@@ -141,7 +141,7 @@ export const team = async (team) => {
           primary_author,
           authors,
           feature_image,
-          published_at,
+          published_at
         }) => ({
           published_at,
           slug,
@@ -149,11 +149,11 @@ export const team = async (team) => {
           tags,
           primary_author,
           authors,
-          feature_image,
+          feature_image
         })
-      ),
-  }
-}
+      )
+  };
+};
 export const team_archive = async (team) => {
   return {
     team,
@@ -163,7 +163,7 @@ export const team_archive = async (team) => {
       .filter((p) =>
         p.tags.find((t) => t.slug == `hash-${team}-team` || t.slug == `${team}`)
       )
-      .filter(({ tags }) => tags.find((t) => t.slug == 'hash-article'))
+      .filter(({ tags }) => tags.find((t) => t.slug == "hash-article"))
       .slice(18)
       .map(
         ({
@@ -173,7 +173,7 @@ export const team_archive = async (team) => {
           primary_author,
           authors,
           feature_image,
-          published_at,
+          published_at
         }) => ({
           published_at,
           slug,
@@ -181,8 +181,8 @@ export const team_archive = async (team) => {
           tags,
           primary_author,
           authors,
-          feature_image,
+          feature_image
         })
-      ),
-  }
-}
+      )
+  };
+};
