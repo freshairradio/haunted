@@ -36,67 +36,68 @@
       radioExists = true;
     }
   }
-  // onMount(() => {
-  //   let canvasCtx = canvas.getContext("2d");
-  //   let dataArray = new Uint8Array($audio.bufferLength);
-  //   let bufferLength = $audio.bufferLength;
-  //   let frame;
-  //   const draw = () => {
-  //     frame = requestAnimationFrame(draw);
-  //     const WIDTH = w;
-  //     const HEIGHT = h;
-  //     $audio.analyser.getByteTimeDomainData(dataArray);
+  onMount(() => {
+    window.canvas = canvas;
+    let canvasCtx = canvas.getContext("2d");
+    let dataArray = new Uint8Array($audio.bufferLength);
+    let bufferLength = $audio.bufferLength;
+    let frame;
+    const draw = () => {
+      frame = requestAnimationFrame(draw);
+      const WIDTH = w;
+      const HEIGHT = h;
+      $audio.analyser.getByteTimeDomainData(dataArray);
 
-  //     canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+      canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-  //     canvasCtx.strokeStyle = "#ff8810";
-  //     canvasCtx.fillStyle = "#ff8810";
+      canvasCtx.strokeStyle = "#ff8810";
+      canvasCtx.fillStyle = "#ff8810";
 
-  //     let sliceWidth = (WIDTH * 1.0) / (bufferLength / 64);
-  //     canvasCtx.lineWidth = sliceWidth / 2;
+      let sliceWidth = (WIDTH * 1.0) / (bufferLength / 128);
+      canvasCtx.lineWidth = sliceWidth / 2;
 
-  //     let x = 0;
-  //     //   let y = 0;
-  //     let lastV = 0;
-  //     let zeroes = [];
-  //     canvasCtx.beginPath();
+      let x = 0;
+      //   let y = 0;
+      let lastV = 0;
+      let zeroes = [];
+      canvasCtx.beginPath();
 
-  //     for (let i = 0; i < bufferLength; i += 64) {
-  //       let avg =
-  //         dataArray.slice(i, i + 64).reduce((acc, e) => acc + e, 0) / 64;
-  //       var v = avg / 128.0;
-  //       var y = (v * HEIGHT) / 2;
-  //       var otherV = v == 1 ? v : v > 1 ? 1 - (v - 1) : 1 + (1 - v);
-  //       var otherY = (otherV * HEIGHT) / 2;
-  //       if (i === 0) {
-  //         canvasCtx.moveTo(x, y);
-  //       } else {
-  //         canvasCtx.moveTo(x, y);
+      for (let i = 0; i < bufferLength; i += 128) {
+        let avg =
+          dataArray.slice(i, i + 128).reduce((acc, e) => acc + e, 0) / 128;
+        var v = avg / 128.0;
+        var y = (v * HEIGHT) / 2;
+        var otherV = v == 1 ? v : v > 1 ? 1 - (v - 1) : 1 + (1 - v);
+        var otherY = (otherV * HEIGHT) / 2;
+        if (i === 0) {
+          canvasCtx.moveTo(x, y);
+        } else {
+          canvasCtx.moveTo(x, y);
 
-  //         canvasCtx.lineTo(x, otherY);
-  //       }
+          canvasCtx.lineTo(x, otherY);
+        }
 
-  //       x += sliceWidth;
-  //     }
-  //     // canvasCtx.lineTo(WIDTH, HEIGHT / 2);
-  //     canvasCtx.stroke();
-  //     canvasCtx.closePath();
-  //     return;
-  //   };
-  //   let timeout;
-  //   const run = () => {
-  //     if (radioExists) {
-  //       draw();
-  //     } else {
-  //       timeout = setTimeout(run, 500);
-  //     }
-  //   };
-  //   run();
-  //   return () => {
-  //     clearTimeout(timeout);
-  //     cancelAnimationFrame(frame);
-  //   };
-  // });
+        x += sliceWidth;
+      }
+      // canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+      canvasCtx.stroke();
+      canvasCtx.closePath();
+      return;
+    };
+    let timeout;
+    const run = () => {
+      if (radioExists) {
+        draw();
+      } else {
+        timeout = setTimeout(run, 500);
+      }
+    };
+    run();
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(frame);
+    };
+  });
 </script>
 
 <style>

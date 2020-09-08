@@ -24,15 +24,15 @@
     let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let analyser = audioCtx.createAnalyser();
 
-    // let source = audioCtx.createMediaElementSource($audio.ref);
-    // source.connect(analyser);
+    let source = audioCtx.createMediaElementSource($audio.ref);
+    source.connect(analyser);
 
-    // analyser.connect(audioCtx.destination);
+    analyser.connect(audioCtx.destination);
 
-    // analyser.fftSize = $audio.bufferLength;
-    // let bufferLength = analyser.fftSize;
-    // let dataArray = new Uint8Array(bufferLength);
-    // analyser.getByteTimeDomainData(dataArray);
+    analyser.fftSize = $audio.bufferLength;
+    let bufferLength = analyser.fftSize;
+    let dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
     $audio.analyser = analyser;
   };
   let w;

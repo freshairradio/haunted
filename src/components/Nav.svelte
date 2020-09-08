@@ -1,31 +1,31 @@
 <script>
-  import { nowplaying, currentShowInfo } from "../util/nowplaying.store";
-  import { audio } from "../util/audio.store";
-  import ShowImage from "./ShowImage.svelte";
-  import byline from "../util/byline.js";
+  import { nowplaying, currentShowInfo } from '../util/nowplaying.store'
+  import { audio } from '../util/audio.store'
+  import ShowImage from './ShowImage.svelte'
+  import byline from '../util/byline.js'
 
-  import PodcastImage from "./PodcastImage.svelte";
-  import Podcast from "./Podcast.svelte";
-  import Control from "./Control";
-  export let segment;
-  export let settings;
-  import { onMount } from "svelte";
-  let w;
-  let h;
-  const updateBroadcastInfo = async () => {
-    let b = await fetch("https://nowplaying.freshair.org.uk").then(r =>
-      r.json()
-    );
-    if (b.slug != $nowplaying) {
-      nowplaying.set(b.slug);
-    }
-    setTimeout(updateBroadcastInfo, 30000);
-  };
-  onMount(updateBroadcastInfo);
+  import PodcastImage from './PodcastImage.svelte'
+  import Podcast from './Podcast.svelte'
+  import Control from './Control'
+  export let segment
+  export let settings
+  import { onMount } from 'svelte'
+  let w
+  let h
+  // const updateBroadcastInfo = async () => {
+  //   let b = await fetch("https://nowplaying.freshair.org.uk").then(r =>
+  //     r.json()
+  //   );
+  //   if (b.slug != $nowplaying) {
+  //     nowplaying.set(b.slug);
+  //   }
+  //   setTimeout(updateBroadcastInfo, 30000);
+  // };
+  // onMount(updateBroadcastInfo);
 
   $: currentShowImage = $currentShowInfo.feature_image
     ? $currentShowInfo.feature_image.small
-    : `https://cdn.freshair.dev/images/fallback.svg`;
+    : `https://cdn.freshair.radio/images/fallback.svg`
 
   $: parsed_byline = byline(
     $currentShowInfo.authors || [],
@@ -35,17 +35,17 @@
       isLive: $audio.live,
       prefix: true
     }
-  );
-  let menuOpen = false;
+  )
+  let menuOpen = false
   const toggleMenu = () => {
     if (menuOpen) {
-      document.body.style.overflow = "auto";
-      menuOpen = false;
+      document.body.style.overflow = 'auto'
+      menuOpen = false
     } else {
-      document.body.style.overflow = "hidden";
-      menuOpen = true;
+      document.body.style.overflow = 'hidden'
+      menuOpen = true
     }
-  };
+  }
 </script>
 
 <style>

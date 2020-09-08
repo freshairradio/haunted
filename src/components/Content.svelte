@@ -1,5 +1,5 @@
 <script>
-  export let html;
+  export let html
 </script>
 
 <style>
@@ -7,7 +7,7 @@
     color: white;
     font-size: var(--fs-normal);
     line-height: 1.45;
-    font-weight: 100;
+    font-weight: 200;
   }
   .content :global(strong) {
     color: white;
@@ -17,6 +17,7 @@
   }
   .content :global(iframe) {
     width: 100%;
+    min-height: 400px;
   }
   .content :global(figure img) {
     width: 100%;
