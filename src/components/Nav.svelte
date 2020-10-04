@@ -3,29 +3,40 @@
   import { audio } from "../util/audio.store";
   import ShowImage from "./ShowImage.svelte";
   import byline from "../util/byline.js";
+  import sc from "../util/schedule.js";
 
   import PodcastImage from "./PodcastImage.svelte";
   import Podcast from "./Podcast.svelte";
   import Control from "./Control";
   export let segment;
   export let settings;
+  settings.navigation = [
+    { label: "Shows", url: "/shows/all/" },
+    { label: "Music", url: "/teams/music/" },
+    { label: "Arts", url: "/teams/arts/" },
+    { label: "Join", url: "/get-in-touch/" },
+    { label: "About", url: "/about/" },
+  ];
   import { onMount } from "svelte";
   let w;
   let h;
-  // const updateBroadcastInfo = async () => {
-  //   let b = await fetch("https://nowplaying.freshair.org.uk").then(r =>
-  //     r.json()
-  //   );
-  //   if (b.slug != $nowplaying) {
-  //     nowplaying.set(b.slug);
-  //   }
-  //   setTimeout(updateBroadcastInfo, 30000);
-  // };
-  // onMount(updateBroadcastInfo);
+
+  let schedule = sc.schedule;
+  const updateBroadcastInfo = async () => {
+    let date = new Date();
+    let clientHour = "hour" + date.getUTCHours();
+    let clientDay = "day" + date.getUTCDay();
+
+    if (schedule[clientDay][clientHour] != "") {
+      nowplaying.set(schedule[clientDay][clientHour]);
+    }
+    setTimeout(updateBroadcastInfo, 30000);
+  };
+  onMount(updateBroadcastInfo);
 
   $: currentShowImage = $currentShowInfo.feature_image
     ? $currentShowInfo.feature_image.small
-    : `https://cdn.freshair.radio/images/fallback.svg`;
+    : `/FreshairWhiteLogo.png`;
 
   $: parsed_byline = byline(
     $currentShowInfo.authors || [],
@@ -33,7 +44,7 @@
     {
       isShow: true,
       isLive: $audio.live,
-      prefix: true
+      prefix: true,
     }
   );
   let menuOpen = false;
@@ -53,7 +64,7 @@
     width: 200px;
     padding: 10px;
     height: 100vh;
-    background: linear-gradient(var(--orange-80), var(--black-80));
+    background: linear-gradient(rgba(35, 7, 77, 0.8), rgba(204, 83, 51, 0.8));
     position: fixed;
     top: 0px;
     left: 0px;
@@ -61,8 +72,7 @@
     overflow-wrap: normal;
   }
 
-  .links a,
-  .links .a {
+  .links a {
     text-decoration: none;
     display: block;
     color: white;
@@ -109,19 +119,20 @@
     font-size: 36px;
     margin-left: -10px;
   }
-
+*/
   .logomark img {
     grid-column: 1;
-    width: 80px;
+    width: 40px;
+    height: 40px;
     align-items: center;
-  } */
+  }
   .logomark {
     position: absolute;
     bottom: 20px;
     left: 0px;
     width: 220px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr;
   }
   .logomark h1 {
     display: flex;
@@ -142,7 +153,7 @@
     padding: 5px;
     font-family: Equity;
     text-transform: lowercase;
-    color: var(--orange);
+    color: var(--white);
     text-align: center;
     width: calc(100% - 10px);
   }
@@ -152,10 +163,10 @@
       height: 60px;
       bottom: 0px;
       top: initial;
-      background: linear-gradient(to left, var(--orange), var(--black));
+      background: linear-gradient(to left, rgb(35, 7, 77), rgb(204, 83, 51));
       padding: 0px;
       display: grid;
-      grid-template-columns: 1fr min-content 80px;
+      grid-template-columns: 2fr min-content 80px;
     }
     .show {
       grid-column: 1;
@@ -169,6 +180,7 @@
       margin: 0px 20px;
       grid-column: 2;
       position: relative;
+      align-items: center;
     }
     .logomark h1 {
       margin: 0px;
@@ -199,7 +211,7 @@
       font-size: var(--fs-ui);
       text-align: left;
       width: initial;
-      color: var(--orange);
+      color: var(--white);
     }
     .title em {
       color: white;
@@ -225,7 +237,11 @@
     height: calc(100vh - 60px);
     padding: 0px 20px;
     z-index: 20;
-    background: var(--orange-90);
+    background: linear-gradient(
+      to left,
+      rgba(35, 7, 77, 0.8),
+      rgba(204, 83, 51, 0.8)
+    );
   }
   .openmenu .links {
     position: absolute;
@@ -266,7 +282,7 @@
     {:else if !$audio.live && $audio.podcast}
       <PodcastImage size="small" />
       <section class="title">{$audio.podcast.title}</section>
-    {:else}<img class="current" src={currentShowImage} />{/if}
+    {/if}
   </section>
   {#if w > 1240}
     <section class="links">
@@ -275,11 +291,11 @@
           {link.label}
         </a>
       {/each}
-      <button class="a" on:click={audio.playLive}>listen live!</button>
+      <!-- <button class="a" on:click={audio.playLive}>listen live!</button> -->
     </section>
   {/if}
   <a class="logomark" href="/">
-    <h1>fresh <strong>air</strong></h1>
+    <h1><img class="logomark" src='/FreshAirWhiteLogo.png' alt=""> fresh <strong>air</strong></h1>
   </a>
   {#if w <= 1240}
     <button class="menu" on:click={toggleMenu}>
@@ -346,7 +362,7 @@
           {link.label}
         </a>
       {/each}
-      <button class="a" on:click={audio.playLive}>listen live!</button>
+      <!-- <button class="a" on:click={audio.playLive}>listen live!</button> -->
     </section>
   </div>
 {/if}
