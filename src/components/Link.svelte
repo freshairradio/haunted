@@ -4,7 +4,7 @@
 
 <style>
   a {
-    background: var(--orange);
+    background: linear-gradient(to left, rgb(35, 7, 77), rgb(204, 83, 51));
     height: 60px;
     border-radius: 8px;
     line-height: 60px;

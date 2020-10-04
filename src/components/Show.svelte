@@ -56,7 +56,7 @@
   }
   h2 {
     margin: 0px;
-    color: var(--orange);
+    color: white;
     font-family: "Equity";
     text-transform: lowercase;
     font-weight: normal;

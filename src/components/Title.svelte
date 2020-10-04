@@ -4,7 +4,7 @@
 
 <style>
   h1 {
-    color: var(--orange);
+    color: white;
     font-family: "Equity";
     text-transform: lowercase;
     font-size: var(--fs-main-big);

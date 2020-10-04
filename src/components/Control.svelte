@@ -7,7 +7,7 @@
 
 <style>
   .control {
-    background: var(--orange);
+    background: linear-gradient(to left, rgb(35, 7, 77), rgb(204, 83, 51));
     border-radius: 100%;
     cursor: pointer;
     box-shadow: 0px 0px 5px white;

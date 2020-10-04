@@ -42,7 +42,7 @@
   .title {
     grid-column: 2;
     grid-row: 4;
-    color: var(--orange);
+    color: white;
     font-family: "Equity";
     text-transform: lowercase;
     font-size: 80px;

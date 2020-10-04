@@ -55,7 +55,7 @@
   .title {
     grid-column: 2;
     grid-row: 4;
-    color: var(--orange);
+    color: white;
     font-family: "Equity";
     text-transform: lowercase;
     font-size: var(--fs-main-big);
@@ -86,7 +86,7 @@
 <div class="shows">
   <div class="semester">
     <h2 class="byline">On Air Shows</h2>
-    <h1 class="title">Lockdown 2020</h1>
+    <h1 class="title">2020</h1>
   </div>
   {#each shows as show, i}
     <ShowCard
