@@ -15,7 +15,7 @@
     { label: "Music", url: "/teams/music/" },
     { label: "Arts", url: "/teams/arts/" },
     { label: "Join", url: "/get-in-touch/" },
-    { label: "About", url: "/about/" },
+    { label: "About", url: "/about/" }
   ];
   import { onMount } from "svelte";
   let w;
@@ -44,7 +44,7 @@
     {
       isShow: true,
       isLive: $audio.live,
-      prefix: true,
+      prefix: true
     }
   );
   let menuOpen = false;
@@ -122,8 +122,9 @@
 */
   .logomark img {
     grid-column: 1;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 60px;
+    object-fit: contain;
     align-items: center;
   }
   .logomark {
@@ -134,16 +135,7 @@
     display: grid;
     grid-template-columns: 2fr;
   }
-  .logomark h1 {
-    display: flex;
-    margin: 0px;
-    justify-self: center;
-    align-items: center;
-    font-weight: 100;
-    color: white;
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
+
   .title {
     background: white;
     display: block;
@@ -176,15 +168,13 @@
       left: initial;
       height: 60px;
       bottom: 0px;
-      width: initial;
-      margin: 0px 20px;
+      width: 220px;
+      margin: 0px 0px;
       grid-column: 2;
       position: relative;
       align-items: center;
     }
-    .logomark h1 {
-      margin: 0px;
-    }
+
     nav .oshow :global(figure),
     nav .oshow :global(figure) :global(img),
     nav .oshow :global(figure) :global(.control-container) {
@@ -257,12 +247,7 @@
     .byline {
       display: none;
     }
-    .logomark {
-      display: none;
-    }
-    nav {
-      grid-template-columns: 1fr 80px;
-    }
+
     .openmenu .show {
       display: none;
     }
@@ -273,7 +258,7 @@
 
 <nav>
   <section class="show" class:oshow={w <= 1240}>
-    {#if $currentShowInfo.feature_image && ($audio.live || !$audio.podcast)}
+    {#if $currentShowInfo.title && ($audio.live || !$audio.podcast)}
       <ShowImage show={$currentShowInfo} size="small" />
       <a href="/shows/{$currentShowInfo.slug}" class="title">
         {$currentShowInfo.title}
@@ -295,7 +280,7 @@
     </section>
   {/if}
   <a class="logomark" href="/">
-    <h1><img class="logomark" src='/FreshAirWhiteLogo.png' alt=""> fresh <strong>air</strong></h1>
+    <img class="logo-image" src='https://cdn.freshair.radio/logos/FreshairFullWhiteLogo.png' alt="">
   </a>
   {#if w <= 1240}
     <button class="menu" on:click={toggleMenu}>

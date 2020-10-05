@@ -1,6 +1,8 @@
 <script>
   import { audio } from "../util/audio.store.js";
   export let size = 50;
+  import { nowplaying, currentShowInfo } from "../util/nowplaying.store";
+
   export let podcast = null;
   $: playing = $audio.live && $audio.volume == 1;
 </script>
@@ -27,7 +29,7 @@
 
 <button
   class="control"
-  on:click={playing ? audio.pauseLive : audio.playLive}
+  on:click={() => (playing ? audio.pauseLive() : audio.playLive($currentShowInfo.episodes[0].meta.audio))}
   style="width:{size}px;height:{size}px">
   {#if !playing}
     <svg id="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">

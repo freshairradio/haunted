@@ -1,8 +1,8 @@
 <script context="module">
   export function preload({ path, params, query }) {
     return this.fetch(`home.json`)
-      .then(r => r.json())
-      .then(home => {
+      .then((r) => r.json())
+      .then((home) => {
         return { home };
       });
   }
@@ -11,7 +11,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  import Heading from "../components/Heading.svelte";
+  import RawHeading from "../components/RawHeading.svelte";
   import ShowImage from "../components/ShowImage.svelte";
   import Control from "../components/Control.svelte";
   import byline from "../util/byline.js";
@@ -23,7 +23,7 @@
   export let home;
   $: currentShowImage = $currentShowInfo.feature_image
     ? $currentShowInfo.feature_image.large
-    : ``;
+    : `https://members.freshair.radio/default-show.png`;
   let w;
   let h;
 
@@ -289,11 +289,12 @@
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} />
 <div class="title-container index">
   <div class="heading-container">
-    {#if $currentShowInfo.feature_image}
-      <Heading
-        slug={$currentShowInfo.slug}
-        authors={$currentShowInfo.authors}
-        tags={$currentShowInfo.tags}
+    {#if $currentShowInfo.title}
+      <RawHeading
+        subtitle="Live now"
+        isShow={true}
+        isPodcast={false}
+        rating={false}
         title={$currentShowInfo.title} />
     {/if}
   </div>
@@ -311,9 +312,7 @@
         <Control size={80} />
       </div>
     </figure>
-
   </div>
-
 </div>
 <div class="related-container">
   <Grid>

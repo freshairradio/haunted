@@ -1,5 +1,5 @@
-import { writable, derived } from 'svelte/store'
-import { throttle } from 'lodash'
+import { writable, derived } from "svelte/store";
+import { throttle } from "lodash";
 const { subscribe, set, update } = writable({
   podcast: null,
   src: null,
@@ -12,14 +12,14 @@ const { subscribe, set, update } = writable({
   analyser: null,
   bufferLength: 32768,
   others:
-    typeof window != 'undefined' && localStorage.getItem('currentTime')
-      ? JSON.parse(localStorage.getItem('currentTime'))
-      : {},
-})
+    typeof window != "undefined" && localStorage.getItem("currentTime")
+      ? JSON.parse(localStorage.getItem("currentTime"))
+      : {}
+});
 const throttledUpdate = throttle((v) => {
-  if (typeof window != 'undefined')
-    setTimeout(() => localStorage.setItem('currentTime', JSON.stringify(v)), 0)
-}, 1000)
+  if (typeof window != "undefined")
+    setTimeout(() => localStorage.setItem("currentTime", JSON.stringify(v)), 0);
+}, 1000);
 
 const audio = {
   set,
@@ -27,20 +27,20 @@ const audio = {
   playPodcast: (podcast) => {
     return update((v) => {
       if (!/radio\.freshair/.test(v.src))
-        v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
+        v.others[v.src] = { current: v.ref.currentTime, duration: v.duration };
 
-      let storedCurrent = v.others[podcast.audio]
+      let storedCurrent = v.others[podcast.audio];
       if (!storedCurrent) {
-        v.others[podcast.audio] = { current: 0, duration: 0 }
-        storedCurrent = 0
+        v.others[podcast.audio] = { current: 0, duration: 0 };
+        storedCurrent = 0;
       } else {
-        storedCurrent = storedCurrent.current
+        storedCurrent = storedCurrent.current;
       }
       setTimeout(() => {
-        v.ref.play()
+        v.ref.play();
 
-        v.ref.currentTime = storedCurrent
-      })
+        v.ref.currentTime = storedCurrent;
+      });
       return {
         ...v,
         podcast,
@@ -48,57 +48,55 @@ const audio = {
         live: false,
         volume: 1,
         paused: false,
-        currentTime: storedCurrent,
-      }
-    })
+        currentTime: storedCurrent
+      };
+    });
   },
   pausePodcast: () => {
     return update((v) => {
-      setTimeout(() => v.ref.pause())
-      v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
+      setTimeout(() => v.ref.pause());
+      v.others[v.src] = { current: v.ref.currentTime, duration: v.duration };
       return {
         ...v,
-        paused: true,
-      }
-    })
+        paused: true
+      };
+    });
   },
-  playLive: () => {
+  playLive: (src) => {
     return update((v) => {
-      v.others[v.src] = { current: v.ref.currentTime, duration: v.duration }
+      v.others[v.src] = { current: v.ref.currentTime, duration: v.duration };
 
-      setTimeout(() => v.ref.play())
+      setTimeout(() => v.ref.play());
 
       return {
         ...v,
-        src: v.live
-          ? v.src
-          : 'https://radio.freshair.org.uk/radio?' + Date.now(),
+        src: v.live ? v.src : src,
 
         live: true,
         paused: false,
         volume: 1,
-        currentTime: v.live ? v.currentTime : 0,
-      }
-    })
+        currentTime: v.live ? v.currentTime : 0
+      };
+    });
   },
   pauseLive: () => {
     return update((v) => {
       return {
         ...v,
-        volume: 0,
-      }
-    })
-  },
-}
+        volume: 0
+      };
+    });
+  }
+};
 const others = derived(audio, ($audio) => {
-  if (/radio\.freshair/.test($audio.src)) return $audio.others
+  if (/radio\.freshair/.test($audio.src)) return $audio.others;
   return {
     ...$audio.others,
-    [$audio.src]: { current: $audio.currentTime, duration: $audio.duration },
-  }
-})
+    [$audio.src]: { current: $audio.currentTime, duration: $audio.duration }
+  };
+});
 others.subscribe((change) => {
-  throttledUpdate(change)
-})
+  throttledUpdate(change);
+});
 
-export { audio, others }
+export { audio, others };

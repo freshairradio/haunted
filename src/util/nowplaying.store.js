@@ -1,20 +1,20 @@
-import { writable } from 'svelte/store'
-import { derived } from 'svelte/store'
+import { writable } from "svelte/store";
+import { derived } from "svelte/store";
 
-const nowplaying = writable(null)
+const nowplaying = writable(null);
 
 const currentShowInfo = derived(
   nowplaying,
   ($a, set) => {
-    if (typeof fetch == 'function' && $a) {
-      fetch(`/shows/${$a}.json`)
+    if (typeof fetch == "function" && $a) {
+      fetch(`https://api.freshair.radio/public/shows/${$a}`)
         .then((r) => r.json())
-        .then((r) => set(r))
+        .then((r) => set(r));
     } else {
-      set({})
+      set({});
     }
   },
   {}
-)
+);
 
-export { nowplaying, currentShowInfo }
+export { nowplaying, currentShowInfo };
