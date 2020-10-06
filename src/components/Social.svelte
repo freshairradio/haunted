@@ -1,8 +1,9 @@
 <script>
-  export let facebook;
-  export let instagram;
-  export let twitter;
   export let show;
+
+  let facebook = (show.meta.facebook ? "https://www.facebook.com/" + show.meta.facebook : null);
+  let instagram = (show.meta.instagram ? "https://www.instagram.com/" + show.meta.instagram : null);
+  let twitter = (show.meta.twitter ? "https://twitter.com/" + show.meta.twitter : null);
 </script>
 
 <style>
