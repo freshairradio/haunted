@@ -76,7 +76,7 @@
     text-decoration: none;
     display: block;
     color: white;
-    font-weight: 100;
+    font-weight: 200;
     text-transform: lowercase;
     text-align: right;
     font-size: var(--fs-ui);

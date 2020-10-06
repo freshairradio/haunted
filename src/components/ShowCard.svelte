@@ -21,13 +21,26 @@
   .show img {
     object-fit: cover;
   }
+  .title {
+    position: absolute;
+    bottom: 0px;
+    font-size: var(--fs-main-small);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    line-height: 1.5;
+    font-family: Equity;
+    color: white;
+    border-radius: 8px;
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+  }
 </style>
 
 <a rel="prefetch" href="shows/{show.slug}" class="show" {style}>
-  <img class="cover" src={show.feature_image.small} />
-  <!-- <div class="title">
-    <span class="highlight">show/</span>
-    {show.title}
-  </div> -->
-
+  <img
+    class="cover"
+    src={show.picture || 'https://members.freshair.radio/default-show.png'} />
+  {#if !show.picture}
+    <div class="title">{show.title}</div>
+  {/if}
 </a>

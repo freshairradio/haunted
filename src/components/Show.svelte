@@ -6,7 +6,7 @@
   import Control from "./Control.svelte";
   import byline from "../util/byline.js";
   import { nowplaying } from "../util/nowplaying.store.js";
-  import Content from "./Content.svelte";
+  import Content from "./SafeContent.svelte";
   import Social from "./Social.svelte";
   export let show;
 </script>
@@ -84,8 +84,9 @@
   </div>
   <div class="content-container">
     <Social {show} />
-    <h2>mondays at 6pm</h2>
-
-    <Content html={show.html} />
+    {#if show.meta.day}
+      <h2>{show.meta.day} at {show.meta.time}</h2>
+    {/if}
+    <Content html={show.description} />
   </div>
 </div>

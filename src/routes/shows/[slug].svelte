@@ -1,9 +1,9 @@
 <script context="module">
   export function preload({ path, params, query }) {
     return this.fetch(`shows/${params.slug}.json`)
-      .then(r => r.json())
-      .then(({ podcasts, ...show }) => {
-        return { show, podcasts };
+      .then((r) => r.json())
+      .then((show) => {
+        return { show };
       });
   }
 </script>
@@ -13,7 +13,6 @@
   import image from "../../util/image.js";
   import Show from "../../components/Show.svelte";
   export let show;
-  export let podcasts;
 </script>
 
 <style>
@@ -55,7 +54,7 @@
 
   </section> -->
 <section class="podcasts">
-  {#each podcasts as podcast}
-    <Podcast {podcast} />
+  {#each show.episodes as podcast}
+    <Podcast {podcast} {show}/>
   {/each}
 </section>

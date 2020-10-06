@@ -9,6 +9,7 @@
   import { onMount } from "svelte";
   let w;
   let h;
+  export let show;
   import Control from "./Control";
   import byline from "../util/byline.js";
   import { nowplaying } from "../util/nowplaying.store.js";
@@ -178,7 +179,9 @@
 
 <div class="podcast-container">
   <section class="podcast" bind:clientWidth={w} bind:clientHeight={h}>
-    <img src={podcast.feature_image.small} class="podcast-image" />
+    <img
+      src={podcast.picture || show.picture || 'https://members.freshair.radio/default-show.png'}
+      class="podcast-image" />
 
     <PodcastControl {podcast} />
 
