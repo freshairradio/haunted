@@ -74,9 +74,9 @@
 
 <figure class={size}>
   <img
-    alt={$audio.podcast && $audio.podcast.image}
+    alt={$audio.podcast && $audio.podcast.picture}
     class="feature"
-    src={$audio.podcast && $audio.podcast.feature_image && $audio.podcast.feature_image.small} />
+    src={$audio.podcast && $audio.podcast.picture} />
   <div>
     <div class="feature-overlay" />
 
