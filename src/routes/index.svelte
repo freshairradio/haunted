@@ -21,8 +21,8 @@
   import Grid from "../components/Grid.svelte";
   import Post from "../components/Post.svelte";
   export let home;
-  $: currentShowImage = $currentShowInfo.feature_image
-    ? $currentShowInfo.feature_image.large
+  $: currentShowImage = $currentShowInfo.picture
+    ? $currentShowInfo.picture
     : `https://members.freshair.radio/default-show.png`;
   let w;
   let h;
