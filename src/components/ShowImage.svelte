@@ -81,7 +81,7 @@
 
 <style>
   .feature {
-    background: var(--orange);
+    background: linear-gradient(to left, rgb(35, 7, 77), rgb(204, 83, 51));
   }
   figure {
     position: relative;

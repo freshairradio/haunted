@@ -10,7 +10,7 @@
     position: relative;
   }
   .cover {
-    background-color: var(--orange);
+    background-color: linear-gradient(to left, rgb(35, 7, 77), rgb(204, 83, 51));
   }
   .show,
   .show img {
