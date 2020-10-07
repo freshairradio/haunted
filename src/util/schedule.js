@@ -34,7 +34,7 @@ export default {
       hour11: "",
       hour12: "808-s-hot-takes",
       hour13: "",
-      hour14: "production-hub-show",
+      hour14: "production-variety-show",
       hour15: "press-pause",
       hour16: "sonic-transcendence",
       hour17: "best-of-both-worlds",
