@@ -49,7 +49,7 @@ export default {
       hour12: "",
       hour13: "",
       hour14: "arts-hub-show",
-      hour15: "",
+      hour15: "brown-time",
       hour16: "under-the-radar",
       hour17: "lacasa-culture",
       hour18: "down-to-earth-but-still-exceptional",
