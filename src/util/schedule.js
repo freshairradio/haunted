@@ -74,7 +74,7 @@ export default {
       hour9: "",
       hour10: "",
       hour11: "escape-to-the-country",
-      hour12: "the-north-south-divide",
+      hour12: "north-south-divide",
       hour13: "i-ll-try-anything-once",
       hour14: "hannah-s-happy-hour",
       hour15: "haters",
