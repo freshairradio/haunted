@@ -70,7 +70,20 @@ export default {
       hour19: "pop-x-pop",
       hour20: "endless-summer"
     },
-    day6: {},
+    day6: {
+      hour9: "",
+      hour10: "",
+      hour11: "escape-to-the-country",
+      hour12: "the-north-south-divide",
+      hour13: "i-ll-try-anything-once",
+      hour14: "hannah-s-happy-hour",
+      hour15: "haters",
+      hour16: "",
+      hour17: "old-new-borrowed-blue",
+      hour18: "eujo-s-jazz-hour",
+      hour19: "easy-listening-with-em",
+      hour20: "you-should-try"
+    },
     day0: {
       hour9: "",
       hour10: "",
@@ -81,7 +94,7 @@ export default {
       hour15: "poetry-but-make-it-relevant",
       hour16: "",
       hour17: "edi-film-club",
-      hour18: "",
+      hour18: "the-edventure-brief",
       hour19: "webster-s-dictionary",
       hour20: "asmarx"
     }
