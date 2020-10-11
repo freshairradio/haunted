@@ -73,7 +73,6 @@
 </style>
 
 <figure class={size}>
-  {JSON.stringify($audio.podcast)}
   <img
     alt={$audio.podcast && $audio.podcast.picture}
     class="feature"
