@@ -29,7 +29,7 @@
 
 <button
   class="control"
-  on:click={() => (playing ? audio.pauseLive() : audio.playLive($currentShowInfo.episodes[0].meta.audio))}
+  on:click={() => (playing ? audio.pauseLive() : audio.playLive())}
   style="width:{size}px;height:{size}px">
   {#if !playing}
     <svg id="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">

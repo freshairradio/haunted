@@ -62,7 +62,7 @@ const audio = {
       };
     });
   },
-  playLive: (src) => {
+  playLive: () => {
     return update((v) => {
       v.others[v.src] = { current: v.ref.currentTime, duration: v.duration };
 
@@ -70,7 +70,9 @@ const audio = {
 
       return {
         ...v,
-        src: v.live ? v.src : src,
+        src: v.live
+          ? v.src
+          : "https://stream.freshair.radio/listen?" + Date.now(),
 
         live: true,
         paused: false,
