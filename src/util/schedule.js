@@ -34,7 +34,7 @@ export default {
       hour11: "",
       hour12: "808-s-hot-takes",
       hour13: "",
-      hour14: "production-hub-show",
+      hour14: "production-variety-show",
       hour15: "press-pause",
       hour16: "sonic-transcendence",
       hour17: "best-of-both-worlds",
@@ -49,7 +49,7 @@ export default {
       hour12: "",
       hour13: "",
       hour14: "arts-hub-show",
-      hour15: "",
+      hour15: "brown-time",
       hour16: "under-the-radar",
       hour17: "lacasa-culture",
       hour18: "down-to-earth-but-still-exceptional",
@@ -70,7 +70,20 @@ export default {
       hour19: "pop-x-pop",
       hour20: "endless-summer"
     },
-    day6: {},
+    day6: {
+      hour9: "",
+      hour10: "",
+      hour11: "escape-to-the-country",
+      hour12: "north-south-divide",
+      hour13: "i-ll-try-anything-once",
+      hour14: "hannah-s-happy-hour",
+      hour15: "haters",
+      hour16: "",
+      hour17: "old-new-borrowed-blue",
+      hour18: "eujo-s-jazz-hour",
+      hour19: "easy-listening-with-em",
+      hour20: "you-should-try"
+    },
     day0: {
       hour9: "",
       hour10: "",
@@ -81,7 +94,7 @@ export default {
       hour15: "poetry-but-make-it-relevant",
       hour16: "",
       hour17: "edi-film-club",
-      hour18: "",
+      hour18: "the-edventure-brief",
       hour19: "webster-s-dictionary",
       hour20: "asmarx"
     }
