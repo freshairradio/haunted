@@ -331,7 +331,7 @@
 {#if w <= 1240 && menuOpen}
   <div class="openmenu">
     <section class="show">
-      {#if $currentShowInfo.feature_image && ($audio.live || !$audio.podcast)}
+      {#if currentShowImage && ($audio.live || !$audio.podcast)}
         <ShowImage show={$currentShowInfo} />
       {:else if !$audio.live && $audio.podcast}
         <Podcast podcast={$audio.podcast} />
