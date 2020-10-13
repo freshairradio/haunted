@@ -70,9 +70,7 @@ const audio = {
 
       return {
         ...v,
-        src: v.live
-          ? v.src
-          : "https://stream.freshair.radio/listen?" + Date.now(),
+        src: v.live ? v.src : "https://stream.freshair.radio/listen",
 
         live: true,
         paused: false,
